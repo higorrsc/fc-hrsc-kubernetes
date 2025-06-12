@@ -18,4 +18,4 @@ spec:
     spec:
       containers:
         - name: go-server
-          image: higorrsc/fc-hrsc-kubernetes-hello-go
+          image: higorrsc/fc-hrsc-kubernetes-hello-go:v2
