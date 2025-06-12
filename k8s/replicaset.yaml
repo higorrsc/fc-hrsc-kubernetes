@@ -2,20 +2,20 @@ apiVersion: apps/v1
 kind: ReplicaSet
 
 metadata:
-    name: go-server
-    labels:
-        app: go-server
+  name: go-server
+  labels:
+    app: go-server
 
 spec:
-    replicas: 2
-    selector:
-        matchLabels:
-            app: go-server
-    template:
-        metadata:
-            labels:
-                app: go-server
-        spec:
-            containers:
-                - name: go-server
-                  image: higorrsc/fc-hrsc-kubernetes-hello-go
+  replicas: 2
+  selector:
+    matchLabels:
+      app: go-server
+  template:
+    metadata:
+      labels:
+        app: go-server
+    spec:
+      containers:
+        - name: go-server
+          image: higorrsc/fc-hrsc-kubernetes-hello-go

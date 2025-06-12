@@ -2,11 +2,11 @@ apiVersion: v1
 kind: Pod
 
 metadata:
-    name: go-server
-    labels:
-        app: go-server
+  name: go-server
+  labels:
+    app: go-server
 
 spec:
-    containers:
-        - name: go-server
-          image: higorrsc/fc-hrsc-kubernetes-hello-go
+  containers:
+    - name: go-server
+      image: higorrsc/fc-hrsc-kubernetes-hello-go
