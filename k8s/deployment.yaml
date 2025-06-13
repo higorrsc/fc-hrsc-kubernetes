@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: go-server
-          image: higorrsc/fc-hrsc-kubernetes-hello-go:v3
+          image: higorrsc/fc-hrsc-kubernetes-hello-go:v4
           envFrom:
             - configMapRef:
                 name: go-server-env-config
@@ -33,3 +33,14 @@ spec:
           #     configMapKeyRef:
           #       name: go-server-env-config
           #       key: AGE
+          volumeMounts:
+            - name: go-server-config
+              mountPath: /go/myFamily
+              readOnly: true
+      volumes:
+        - name: go-server-config
+          configMap:
+            name: config-family
+            items:
+              - key: members
+                path: family.txt

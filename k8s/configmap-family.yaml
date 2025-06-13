@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: config-family
+
+data:
+  members: "Higor, Thaís, Vinícius, Erick"
