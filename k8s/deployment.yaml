@@ -19,8 +19,17 @@ spec:
       containers:
         - name: go-server
           image: higorrsc/fc-hrsc-kubernetes-hello-go:v3
-          env:
-            - name: NAME
-              value: "Higor"
-            - name: AGE
-              value: "41"
+          envFrom:
+            - configMapRef:
+                name: go-server-env-config
+          # env:
+          # - name: NAME
+          #   valueFrom:
+          #     configMapKeyRef:
+          #       name: go-server-env-config
+          #       key: NAME
+          # - name: AGE
+          #   valueFrom:
+          #     configMapKeyRef:
+          #       name: go-server-env-config
+          #       key: AGE

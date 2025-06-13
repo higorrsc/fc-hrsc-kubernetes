@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+
+metadata:
+  name: go-server-env-config
+
+data:
+  NAME: "Higor Rodrigues"
+  AGE: "41"
