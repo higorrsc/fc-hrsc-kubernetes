@@ -15,7 +15,16 @@ spec:
   #     protocol: TCP
   #     port: 8085 # port on which the service is exposed
   #     targetPort: 8080 # port on which the container is listening
-  type: NodePort
+  # type: NodePort
+  # selector:
+  #   app: go-server
+  # ports:
+  #   - name: go-server-service
+  #     protocol: TCP
+  #     port: 8085 # port on which the service is exposed
+  #     targetPort: 8080 # port on which the container is listening
+  #     nodePort: 30001 # between 30000 and 32767
+  type: LoadBalancer
   selector:
     app: go-server
   ports:
@@ -23,4 +32,3 @@ spec:
       protocol: TCP
       port: 8085 # port on which the service is exposed
       targetPort: 8080 # port on which the container is listening
-      nodePort: 30001 # between 30000 and 32767
