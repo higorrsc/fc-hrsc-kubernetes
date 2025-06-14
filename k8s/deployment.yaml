@@ -18,10 +18,12 @@ spec:
     spec:
       containers:
         - name: go-server
-          image: higorrsc/fc-hrsc-kubernetes-hello-go:v4
+          image: higorrsc/fc-hrsc-kubernetes-hello-go:v5
           envFrom:
             - configMapRef:
                 name: go-server-env-config
+            - secretRef:
+                name: go-server-secret
           # env:
           # - name: NAME
           #   valueFrom:
