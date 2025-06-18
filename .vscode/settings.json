@@ -1,3 +1,13 @@
 {
-    "cSpell.words": ["healthz", "higorrsc", "hrsc", "Thaís"]
+    "cSpell.words": [
+        "apiregistration",
+        "apiserver",
+        "healthz",
+        "higorrsc",
+        "hrsc",
+        "linux",
+        "livez",
+        "readyz",
+        "Thaís"
+    ]
 }
