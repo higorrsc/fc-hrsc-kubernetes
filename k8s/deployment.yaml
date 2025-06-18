@@ -18,22 +18,23 @@ spec:
     spec:
       containers:
         - name: go-server
-          image: higorrsc/fc-hrsc-kubernetes-hello-go:v5.2
-          # livenessProbe:
-          #   httpGet:
-          #     path: /healthz
-          #     port: 8080
-          #   periodSeconds: 5
-          #   failureThreshold: 3
-          #   timeoutSeconds: 1
-          #   successThreshold: 1
+          image: higorrsc/fc-hrsc-kubernetes-hello-go:v5.3
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+            periodSeconds: 5
+            failureThreshold: 1
+            timeoutSeconds: 1
+            successThreshold: 1
+            initialDelaySeconds: 10
           readinessProbe:
             httpGet:
               path: /healthz
               port: 8080
             periodSeconds: 3
             failureThreshold: 1
-            initialDelaySeconds: 10
+            initialDelaySeconds: 15
           envFrom:
             - configMapRef:
                 name: go-server-env-config
