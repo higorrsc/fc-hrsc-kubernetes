@@ -130,32 +130,49 @@ spec:
       labels:
         k8s-app: metrics-server
     spec:
+      # --- INÍCIO DA SEÇÃO CORRIGIDA ---
+      serviceAccountName: metrics-server
+      priorityClassName: system-cluster-critical
+      nodeSelector:
+        kubernetes.io/hostname: fullcycle-control-plane
+      tolerations:
+        - effect: NoSchedule
+          key: node-role.kubernetes.io/control-plane
+      volumes:
+        - name: tmp-dir
+          emptyDir: {}
       containers:
-        - args:
-            - --cert-dir=/tmp
-            - --secure-port=10250
-            - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
-            - --kubelet-use-node-status-port
-            - --kubelet-insecure-tls
-            - --metric-resolution=15s
+        - name: metrics-server
           image: registry.k8s.io/metrics-server/metrics-server:v0.7.2
           imagePullPolicy: IfNotPresent
-          livenessProbe:
-            failureThreshold: 3
-            httpGet:
-              path: /livez
-              port: https
-              scheme: HTTPS
-            periodSeconds: 10
-          name: metrics-server
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+            seccompProfile:
+              type: RuntimeDefault
           ports:
-            - containerPort: 10250
-              name: https
+            - name: https
+              containerPort: 4443
               protocol: TCP
+          args:
+            - --cert-dir=/tmp
+            - --secure-port=4443
+            - --kubelet-preferred-address-types=InternalIP,ExternalIP,Hostname
+            - --kubelet-use-node-status-port
+            - --metric-resolution=15s
+            - --kubelet-insecure-tls
           readinessProbe:
-            failureThreshold: 3
             httpGet:
               path: /readyz
+              port: https
+              scheme: HTTPS
+            initialDelaySeconds: 20
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /livez
               port: https
               scheme: HTTPS
             initialDelaySeconds: 20
@@ -164,26 +181,9 @@ spec:
             requests:
               cpu: 100m
               memory: 200Mi
-          securityContext:
-            allowPrivilegeEscalation: false
-            capabilities:
-              drop:
-                - ALL
-            readOnlyRootFilesystem: true
-            runAsNonRoot: true
-            runAsUser: 1000
-            seccompProfile:
-              type: RuntimeDefault
           volumeMounts:
-            - mountPath: /tmp
-              name: tmp-dir
-      nodeSelector:
-        kubernetes.io/os: linux
-      priorityClassName: system-cluster-critical
-      serviceAccountName: metrics-server
-      volumes:
-        - emptyDir: {}
-          name: tmp-dir
+            - name: tmp-dir
+              mountPath: /tmp
 ---
 apiVersion: apiregistration.k8s.io/v1
 kind: APIService
