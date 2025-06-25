@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: go-server
-          image: higorrsc/fc-hrsc-kubernetes-hello-go:v5.3
+          image: higorrsc/fc-hrsc-kubernetes-hello-go:v5.4
           resources:
             requests:
               cpu: "0.3"
