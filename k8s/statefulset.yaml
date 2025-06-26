@@ -6,8 +6,7 @@ metadata:
 
 spec:
   serviceName: mysql-h
-  podManagementPolicy: Parallel
-  replicas: 3
+  replicas: 4
   selector:
     matchLabels:
       app: mysql
