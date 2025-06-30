@@ -5,6 +5,7 @@
         "healthz",
         "higorrsc",
         "hrsc",
+        "letsencrypt",
         "linux",
         "livez",
         "mysql",
